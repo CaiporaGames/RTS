@@ -5,6 +5,8 @@ public class UnitUISelectionController : MonoBehaviour
 {
     [SerializeField] private UnitSelectionController unitSelectionController = null;
     [SerializeField] private RectTransform selectionAreaTransform = null;
+    [SerializeField] private Canvas canvas = null;
+
 
     private void Start()
     {
@@ -31,8 +33,9 @@ public class UnitUISelectionController : MonoBehaviour
 
     private void UpdateVisualAreaSelection()
     {
+        float canvasScale = canvas.transform.localScale.x;
         Rect selectionAreaRect = unitSelectionController.GetSelectionAreaRect();
-        selectionAreaTransform.anchoredPosition = new Vector2(selectionAreaRect.x, selectionAreaRect.y);
-        selectionAreaTransform.sizeDelta = new Vector2(selectionAreaRect.width, selectionAreaRect.height);
+        selectionAreaTransform.anchoredPosition = new Vector2(selectionAreaRect.x, selectionAreaRect.y) / canvasScale;
+        selectionAreaTransform.sizeDelta = new Vector2(selectionAreaRect.width, selectionAreaRect.height) / canvasScale;
     }
 }

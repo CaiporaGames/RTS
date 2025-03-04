@@ -424,6 +424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseWorldPosition: {fileID: 349408817}
+  mainCamera: {fileID: 330585545}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -596,6 +597,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitSelectionController: {fileID: 349408819}
   selectionAreaTransform: {fileID: 1017739044}
+  canvas: {fileID: 721732939}
 --- !u!1 &721732936
 GameObject:
   m_ObjectHideFlags: 0
