@@ -2,13 +2,7 @@ using UnityEngine;
 
 public class MouseWorldPosition : MonoBehaviour
 {
-    public static MouseWorldPosition instance {get; private set;}
     [SerializeField] private Camera mainCamera = null;
-
-    void Start()
-    {
-        instance = this;
-    }
 
     public Vector3 GetMouseHitPosition()
     {
