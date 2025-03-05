@@ -13,8 +13,12 @@ partial struct FindTargetSystem : ISystem
         CollisionWorld collisionWorld = physicsWorldSingleton.CollisionWorld;
         NativeList<DistanceHit> distanceHits = new NativeList<DistanceHit>(Allocator.Temp);
 
-        foreach((var localTransform, var findTarget) in SystemAPI.Query<RefRO<LocalTransform>, RefRO<FindTarget>>())
+        foreach((var localTransform, var findTarget, var target) in SystemAPI.Query<RefRO<LocalTransform>, RefRW<FindTarget>, RefRW<Target>>())
         {
+            findTarget.ValueRW.timer -= SystemAPI.Time.DeltaTime;
+            if(findTarget.ValueRW.timer > 0) continue;
+            findTarget.ValueRW.timer = findTarget.ValueRO.maxTimer;
+
             distanceHits.Clear();
             CollisionFilter collisionFilter = new CollisionFilter
             {
@@ -22,13 +26,24 @@ partial struct FindTargetSystem : ISystem
                 CollidesWith = 1u << 6,
                 GroupIndex = 0
             };
-            collisionWorld.OverlapSphere
+            if(collisionWorld.OverlapSphere
             (
                 localTransform.ValueRO.Position, 
                 findTarget.ValueRO.findRange,
                 ref distanceHits,
                 collisionFilter
-            );
+            ))
+            {
+                foreach(DistanceHit distanceHit in distanceHits)
+                {
+                    Unit unitTarget = SystemAPI.GetComponent<Unit>(distanceHit.Entity);
+                    if(unitTarget.faction == findTarget.ValueRO.faction)
+                    {
+                        target.ValueRW.targetEntity = distanceHit.Entity;
+                        break;
+                    }
+                }
+            }
         }
     }
 }

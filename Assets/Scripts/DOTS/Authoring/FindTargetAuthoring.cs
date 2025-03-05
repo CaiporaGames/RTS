@@ -4,6 +4,7 @@ using UnityEngine;
 public class FindTargetAuthoring : MonoBehaviour
 {
     [SerializeField] private float findRange = 5f;
+    [SerializeField] private float maxTimer = 5f;
     [SerializeField] private Faction faction;
     public class Baker : Baker<FindTargetAuthoring>
     {
@@ -14,6 +15,7 @@ public class FindTargetAuthoring : MonoBehaviour
             {
                 findRange = authoring.findRange,
                 faction = authoring.faction,
+                maxTimer = authoring.maxTimer
             });
         }
     }

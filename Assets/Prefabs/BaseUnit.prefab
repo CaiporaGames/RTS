@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 8935668713022109788}
   - component: {fileID: 970546046623486385}
   - component: {fileID: -8592224825067084487}
+  - component: {fileID: 2690464891719808267}
   m_Layer: 6
   m_Name: BaseUnit
   m_TagString: Untagged
@@ -212,3 +213,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49805bbb14b5c1346a444c442f2486c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  findRange: 5
+  maxTimer: 0.2
+  faction: 0
+--- !u!114 &2690464891719808267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4618456258241194839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14dc79185a017314d8d2bfa65f881bc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
