@@ -425,6 +425,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseWorldPosition: {fileID: 349408817}
   mainCamera: {fileID: 330585545}
+  gameConstants: {fileID: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0

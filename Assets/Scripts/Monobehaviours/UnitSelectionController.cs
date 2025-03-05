@@ -12,7 +12,6 @@ public class UnitSelectionController : MonoBehaviour
     public event EventHandler OnSelectionAreaEnded;
     [SerializeField] private MouseWorldPosition mouseWorldPosition = null;
     [SerializeField] private Camera mainCamera = null;
-    [SerializeField] private SOGameConstants gameConstants = null;
     private Vector2 selectStartMousePosition = Vector2.zero;
 
     void Update()
@@ -78,7 +77,7 @@ public class UnitSelectionController : MonoBehaviour
                     Filter = new CollisionFilter
                     {
                         BelongsTo = ~0u,
-                        CollidesWith = 1u << gameConstants.UNITS_LAYER,
+                        CollidesWith = 1u << 6,
                         GroupIndex = 0
                     }
                 };
@@ -86,10 +85,12 @@ public class UnitSelectionController : MonoBehaviour
                 if(collisionWorld.CastRay(raycastInput, out Unity.Physics.RaycastHit hit))
                 {
                     if(entityManager.HasComponent<Unit>(hit.Entity) && entityManager.HasComponent<Selected>(hit.Entity))
-                    entityManager.SetComponentEnabled<Selected>(hit.Entity, true);
-                    Selected selected = entityManager.GetComponentData<Selected>(hit.Entity);
-                    selected.onSelected = true;
-                    entityManager.SetComponentData(hit.Entity, selected);
+                    {
+                        entityManager.SetComponentEnabled<Selected>(hit.Entity, true);
+                        Selected selected = entityManager.GetComponentData<Selected>(hit.Entity);
+                        selected.onSelected = true;
+                        entityManager.SetComponentData(hit.Entity, selected);
+                    }
                 }
             }
 
